@@ -8,7 +8,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "eu.kanade"
+        applicationId = "app.komikku"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -51,19 +51,28 @@ android {
 
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    // Compose
+    implementation(compose.activity)
+    implementation(compose.foundation)
+    implementation(compose.material3.core)
+    implementation(compose.material.icons)
+    implementation(compose.animation)
+    implementation(compose.animation.graphics)
+    implementation(compose.ui)
+    debugImplementation(compose.ui.tooling)
+    implementation(compose.ui.tooling.preview)
+    implementation(compose.ui.graphics)
+    implementation(compose.ui.util)
+
+    implementation(platform(compose.bom))
+
+    // AndroidX libraries
+    implementation(androidx.corektx)
+
+    implementation(androidx.bundles.lifecycle)
+
+    // Tests
+    testImplementation(libs.bundles.test)
+
+    androidTestImplementation(platform(compose.bom))
 }
