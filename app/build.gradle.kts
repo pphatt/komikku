@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -69,10 +71,22 @@ dependencies {
     // AndroidX libraries
     implementation(androidx.corektx)
 
+    implementation(androidx.bundles.navigation)
+
     implementation(androidx.bundles.lifecycle)
 
     // Tests
     testImplementation(libs.bundles.test)
 
     androidTestImplementation(platform(compose.bom))
+}
+
+tasks {
+    // See https://kotlinlang.org/docs/reference/experimental.html#experimental-status-of-experimental-api(-markers)
+    // https://stackoverflow.com/a/44143253
+    withType<KotlinCompile> {
+        compilerOptions.freeCompilerArgs.addAll(
+            "-opt-in=androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi",
+        )
+    }
 }
