@@ -86,6 +86,8 @@ tasks {
     // https://stackoverflow.com/a/44143253
     withType<KotlinCompile> {
         compilerOptions.freeCompilerArgs.addAll(
+            "-opt-in=androidx.compose.material.ExperimentalMaterialApi",
+            "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
             "-opt-in=androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi",
         )
     }

@@ -9,18 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
+import eu.kanade.presentation.history.components.HistoryScreen
 
 @Composable
 fun HistoryRoute() {
-    Box(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .align(Alignment.Center),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text("History Screen", fontSize = 20.sp)
-        }
-    }
+    HistoryScreen(
+        searchQuery = null,
+        onSearchQueryChange = {}
+    )
 }

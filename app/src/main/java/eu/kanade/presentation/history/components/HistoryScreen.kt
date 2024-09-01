@@ -1,43 +1,46 @@
-package eu.kanade.presentation.library
+package eu.kanade.presentation.history.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import eu.kanade.presentation.library.components.LibraryToolBar
+import eu.kanade.presentation.library.components.LibraryToolbarTitle
+import eu.kanade.ui.component.AppBarTitle
+import eu.kanade.ui.component.SearchToolBar
 
+// History screen is just like library tool bar but it just has one function is the search tool bar
 @Composable
-fun LibraryRoute() {
-    val screenModel = LibraryScreenModel()
+fun HistoryScreen(
+    searchQuery: String? = null,
+    onSearchQueryChange: (String?) -> Unit,
 
-    // we can make a custom scaffold
+    scrollBehavior: TopAppBarScrollBehavior? = null
+) {
     Scaffold(
         topBar = {
-            // this can be improved by adding i18n
-            val title = screenModel.getToolbarTitle("Library")
-
-            LibraryToolBar(
-                title = title,
-                searchQuery = null,
-                onSearchQueryChange = screenModel::search,
+            SearchToolBar(
+                titleContent = { AppBarTitle(title = "History") },
+                searchQuery = searchQuery,
+                onChangeSearchQuery = onSearchQueryChange,
+                scrollBehavior = scrollBehavior
             )
         }
-    ) { paddingValues ->
+    ) { contentPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(
-                    top = paddingValues.calculateTopPadding(), bottom = 0.dp
+                    top = contentPadding.calculateTopPadding(),
+                    bottom = 0.dp
                 )
         ) {
             Column(
@@ -47,7 +50,7 @@ fun LibraryRoute() {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text("Library Screen", fontSize = 20.sp)
+                Text("History Screen", fontSize = 20.sp)
             }
         }
     }

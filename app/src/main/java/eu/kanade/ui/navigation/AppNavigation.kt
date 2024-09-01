@@ -1,5 +1,7 @@
 package eu.kanade.ui.navigation
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -33,11 +35,14 @@ fun AppNavigation() {
                     navigateToBrowser = navigationActions.navigateToBrowse,
                 )
             }
-        ) { paddingValues ->
-            NavigationGraph(
-                navController = navController,
-                modifier = Modifier.padding(paddingValues)
-            )
+        ) { contentPadding ->
+            Box(
+                modifier = Modifier.padding(
+                    bottom = contentPadding.calculateBottomPadding()
+                )
+            ) {
+                NavigationGraph(navController = navController)
+            }
         }
     }
 }
