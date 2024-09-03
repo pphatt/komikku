@@ -5,9 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Scaffold
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import eu.kanade.presentation.library.components.LibraryToolBar
+import komikku.presentation.core.components.material.Scaffold
 
 @Composable
 fun LibraryRoute() {
@@ -22,7 +21,7 @@ fun LibraryRoute() {
 
     // we can make a custom scaffold
     Scaffold(
-        topBar = {
+        topBar = { scrollBehavior ->
             // this can be improved by adding i18n
             val title = screenModel.getToolbarTitle("Library")
 
@@ -30,6 +29,7 @@ fun LibraryRoute() {
                 title = title,
                 searchQuery = null,
                 onSearchQueryChange = screenModel::search,
+                scrollBehavior = scrollBehavior
             )
         }
     ) { paddingValues ->
@@ -40,14 +40,16 @@ fun LibraryRoute() {
                     top = paddingValues.calculateTopPadding(), bottom = 0.dp
                 )
         ) {
-            Column(
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .align(Alignment.Center),
                 verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Text("Library Screen", fontSize = 20.sp)
+                items(51) {
+                    Text(text = it.toString(), fontSize = 20.sp)
+                }
             }
         }
     }
