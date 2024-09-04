@@ -33,7 +33,6 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.ScaffoldDefaults
-import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost

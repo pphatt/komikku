@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     alias(libs.plugins.android.application)
     alias(kotlinx.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.google.dagger.hilt.android)
+    alias(libs.plugins.google.devtools.ksp)
 }
 
 android {
@@ -46,13 +48,25 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
 
     packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
+        resources.excludes.addAll(
+            listOf(
+                "META-INF/DEPENDENCIES",
+                "LICENSE.txt",
+                "META-INF/LICENSE",
+                "META-INF/LICENSE.txt",
+                "META-INF/README.md",
+                "META-INF/NOTICE",
+                "META-INF/NOTICE.txt",
+                "META-INF/ASL2.0",
+                "META-INF/*.kotlin_module",
+                // temporary solution
+                "META-INF/gradle/incremental.annotation.processors"
+            ),
+        )
     }
 }
 
@@ -80,6 +94,21 @@ dependencies {
     implementation(androidx.bundles.navigation)
 
     implementation(androidx.bundles.lifecycle)
+
+    // Libraries
+    implementation(libs.leakcanary)
+
+    implementation(libs.retrofit2)
+    implementation(libs.retrofit2.converter.moshi)
+
+    implementation(libs.bundles.okhttp)
+
+    // Dagger - Hilt
+    ksp(libs.androidx.hilt.compiler)
+    ksp(libs.google.hilt.android.compiler)
+    implementation(libs.google.hilt.android)
+    implementation(libs.google.hilt.android.compiler)
+    implementation(libs.google.hilt.android.testing)
 
     // Tests
     testImplementation(libs.bundles.test)
