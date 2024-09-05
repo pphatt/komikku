@@ -5,7 +5,10 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import komikku.presentation.core.components.material.PullRefresh
@@ -21,8 +24,16 @@ fun LibraryContent(
             end = contentPadding.calculateEndPadding(LocalLayoutDirection.current)
         )
     ) {
-        PullRefresh(refreshing = true, enabled = false, onRefresh = { /*TODO*/ }) {
+        val coercedCurrentPage = remember { 100.coerceAtMost(100) }
+        val pagerState = rememberPagerState(coercedCurrentPage) { 100 }
 
+        val scope = rememberCoroutineScope()
+
+        PullRefresh(refreshing = false, enabled = true, onRefresh = { /*TODO*/ }) {
+            LibraryPager(
+                state = pagerState,
+                contentPadding = PaddingValues(bottom = contentPadding.calculateBottomPadding())
+            )
         }
     }
 }

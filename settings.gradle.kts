@@ -42,3 +42,4 @@ dependencyResolutionManagement {
 rootProject.name = "Komikku"
 include(":app")
 include(":presentation-core")
+include(":domain")
