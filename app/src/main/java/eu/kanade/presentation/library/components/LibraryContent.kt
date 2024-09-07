@@ -25,7 +25,7 @@ fun LibraryContent(
         )
     ) {
         val coercedCurrentPage = remember { 100.coerceAtMost(100) }
-        val pagerState = rememberPagerState(coercedCurrentPage) { 100 }
+        val pagerState = rememberPagerState(coercedCurrentPage) { 1 }
 
         val scope = rememberCoroutineScope()
 

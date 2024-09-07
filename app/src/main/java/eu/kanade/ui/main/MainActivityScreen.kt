@@ -1,6 +1,7 @@
 package eu.kanade.ui.main
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -46,9 +47,9 @@ fun MainActivityScreen(
         ) { contentPadding ->
             if (state.isInitialized) {
                 Box(
-                    modifier = Modifier.padding(
-                        bottom = contentPadding.calculateBottomPadding()
-                    )
+                    modifier = Modifier
+                        .padding(contentPadding)
+                        .consumeWindowInsets(contentPadding),
                 ) {
                     NavigationGraph(navController = navController)
                 }
